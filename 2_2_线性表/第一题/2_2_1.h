@@ -55,6 +55,14 @@ bool show_list(Sqlist L){
     return true;
 }
 
+// 向有序表中添加元素
+bool sqlist_append(Sqlist &L, int e){
+    if (L.length == Maxsize){
+        return false;
+    }
+    L.data[L.length++] = e;
+    return true;
+}
 
 // 第一题要求的代码
 /*

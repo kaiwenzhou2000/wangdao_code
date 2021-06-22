@@ -14,7 +14,7 @@ Sqlist make_seq_list(){
     L.data[0] = 1;
     L.data[1] = 2;
     L.data[2] = 3;
-    L.data[3] = 4;
+    L.data[3] = 3;
     L.data[4] = 10;
     return L;
 }
