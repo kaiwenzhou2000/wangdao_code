@@ -11,5 +11,9 @@ int main(){
     double_link_list_push(L,2);
     double_link_list_push(L,3);
     show_double_link_list(L);
+    cout << Locate(L, 1) << endl;
+    cout << Locate(L, 3) << endl;
+    cout << Locate(L, 3) << endl;
+    show_double_link_list(L);
     return 0;
 }
