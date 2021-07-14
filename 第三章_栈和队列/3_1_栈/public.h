@@ -92,7 +92,7 @@ void stack_init(stack_char s){
  * */
 bool push(stack_char &s, char e){
     // 栈满
-    if (s.top == maxN){
+    if (s.top == maxN-1){
         return false;
     }
 
