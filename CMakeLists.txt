@@ -49,3 +49,7 @@ add_executable(2_3_25 第二章_线性表/2_3_链表/第二十五题/2_3_25.cpp 
 add_executable(3_1_3 第三章_栈和队列/3_1_栈/第三题/3_1_3.cpp)
 add_executable(3_1_4 第三章_栈和队列/3_1_栈/第四题/3_1_4.cpp)
 add_executable(3_1_5 第三章_栈和队列/3_1_栈/第五题/3_1_5.cpp)
+add_executable(3_2_1 第三章_栈和队列/3_2_队列/第一题/3_2_1.cpp)
+add_executable(3_2_2 第三章_栈和队列/3_2_队列/第二题/3_2_2.cpp)
+add_executable(3_2_3 第三章_栈和队列/3_2_队列/第三题/3_2_3.cpp)
+add_executable(3_2_4 第三章_栈和队列/3_2_队列/第四题/3_2_4.cpp)
