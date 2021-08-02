@@ -5,4 +5,9 @@
 #ifndef WANGDAO_CODE_PUBLIC_H
 #define WANGDAO_CODE_PUBLIC_H
 
+#include "iostream"
+#include "cstdlib"
+
+using namespace std;
+
 #endif //WANGDAO_CODE_PUBLIC_H
