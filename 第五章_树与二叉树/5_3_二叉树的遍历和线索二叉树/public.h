@@ -250,4 +250,35 @@ void show_level_tree(BiTree T){
     }
 }
 
+void find_ancestor(BiTree T, char ch, BiTNode* ancestor[], int &ancestor_index){
+    stack ss;
+    ini_stack(ss);
+    BiTNode *p = T;
+    BiTNode *recent_visit = nullptr;
+    while (!is_empty_stack(ss) || p){
+        if (p){
+            if (p->data == ch){
+                // 找到节点
+                cout << endl;
+                for (int i = 0; i <= ss.top; ++i) {
+                    ancestor[ancestor_index++] = ss.data[i];
+                }
+                cout << "======="<< endl;
+                return;
+            }
+            push(ss,p);
+            p = p->lchild;
+        } else{
+            p = get_top(ss);
+            if (p->rchild && p->rchild != recent_visit){
+                p = p->rchild;
+            } else{
+                pop(ss);
+                recent_visit = p;
+                p = nullptr;
+            }
+        }
+    }
+}
+
 #endif //WANGDAO_CODE_PUBLIC_H
