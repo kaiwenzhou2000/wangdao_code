@@ -125,6 +125,47 @@ BiTNode* get_rear(Quene &q){
 
 /*=========================== 关于队列 ===========================end*/
 
+/*=========================== 关于链表 ===========================*/
+
+typedef struct link_node{
+    BiTNode *data;
+    struct link_node* next;
+}link_node, *Link_list;
+
+void ini_link_list(Link_list &L){
+    L = (link_node*) malloc(sizeof(link_node));
+    L->next = nullptr;
+}
+
+void insert_link_list(Link_list &L, BiTNode *node){
+    link_node *p, *pre, *data;
+    data = (link_node*) malloc(sizeof(link_node));
+    data->data = node;
+    data->next = nullptr;
+    p = L->next;
+    pre = L;
+    while (p){
+        p = p->next;
+        pre = pre->next;
+    }
+
+    pre->next = data;
+}
+
+void show_link_list(Link_list L){
+    link_node *p;
+    p = L->next;
+    while (p){
+        cout << p->data->data << ' ';
+        p = p->next;
+    }
+
+    cout << endl;
+}
+
+/*=========================== 关于链表 ===========================end*/
+
+
 /*
  *  使用二叉链表生成二叉树
  *  使用先序和中序序列
@@ -250,6 +291,8 @@ void show_level_tree(BiTree T){
     }
 }
 
+
+// 找公共祖先
 void find_ancestor(BiTree T, char ch, BiTNode* ancestor[], int &ancestor_index){
     stack ss;
     ini_stack(ss);
@@ -279,6 +322,50 @@ void find_ancestor(BiTree T, char ch, BiTNode* ancestor[], int &ancestor_index){
             }
         }
     }
+}
+
+// 中序线索二叉树
+typedef struct ThreadNode{
+    char data;
+    struct ThreadNode *lchild, *rchild;
+    int ltag = 0, rtag = 0;     // 0 表示没有线索，1指向的线索
+}ThreadNode, *ThreadTree;
+
+// 创建线索二叉树，此时只是建立树，并没有线索化
+ThreadTree pre_in_create_ThreadTree(char pre_order_array[], char in_order_array[], int pre_head, int pre_rear, int in_head, int in_rear){
+    // 创建根，并根据先序序列先给根赋值
+    ThreadNode *root = (ThreadNode*) malloc(sizeof(ThreadNode));
+    root->data = pre_order_array[pre_head];
+
+    // 通过根的值，找到在后序序列的中根的位置
+    int i;
+    for (i = in_head; in_order_array[i] != root->data; i++);
+
+    // 计算左子树和右子树的大小，若大小为1表明不需要再递归细分了
+    int llen = i-in_head;       // 左子树的长度
+    int rlen = in_rear-i;       // 右子树的长度
+
+    if (llen > 0){
+        root->lchild = pre_in_create_ThreadTree(pre_order_array, in_order_array, pre_head+1, pre_head+llen, in_head, i-1);
+    } else{
+        root->lchild = nullptr;
+    }
+
+    if (rlen > 0){
+        root->rchild = pre_in_create_ThreadTree(pre_order_array, in_order_array, pre_head+llen+1, pre_rear, i+1, in_rear);
+    } else{
+        root->rchild = nullptr;
+    }
+
+    return root;
+}
+
+// 获得一颗线索二叉树
+// 线索化的过程在5.3.18中
+ThreadTree get_tree_with_thread(){
+    char pre_order_array[9] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
+    char in_order_array[9] = {'B', 'C', 'A', 'E', 'D', 'G', 'H', 'F', 'I'};
+    return pre_in_create_ThreadTree(pre_order_array, in_order_array, 0, 8, 0, 8);
 }
 
 #endif //WANGDAO_CODE_PUBLIC_H
